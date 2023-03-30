@@ -1,0 +1,5 @@
+if(EXISTS "/home/ukasz/CLionProjects/CurrencyRates/build/tests/testCurrentRate.cpp[1]_tests.cmake")
+  include("/home/ukasz/CLionProjects/CurrencyRates/build/tests/testCurrentRate.cpp[1]_tests.cmake")
+else()
+  add_test(testCurrentRate.cpp_NOT_BUILT testCurrentRate.cpp_NOT_BUILT)
+endif()

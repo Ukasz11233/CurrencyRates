@@ -1,0 +1,5 @@
+if(EXISTS "/home/ukasz/CLionProjects/CurrencyRates/build/tests/myTest[1]_tests.cmake")
+  include("/home/ukasz/CLionProjects/CurrencyRates/build/tests/myTest[1]_tests.cmake")
+else()
+  add_test(myTest_NOT_BUILT myTest_NOT_BUILT)
+endif()

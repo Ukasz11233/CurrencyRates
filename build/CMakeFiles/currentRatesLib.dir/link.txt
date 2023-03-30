@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcurrentRatesLib.a CMakeFiles/currentRatesLib.dir/src/CurrentRates.cpp.o
+/usr/bin/ranlib libcurrentRatesLib.a
