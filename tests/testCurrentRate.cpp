@@ -6,6 +6,7 @@ class testCurrentRate : public ::testing::TestWithParam<double>
 public:
     void SetUp() override {}
 
+private:
 };
 
 TEST_P(testCurrentRate, initalTest)
