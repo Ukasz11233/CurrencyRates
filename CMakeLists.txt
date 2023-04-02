@@ -10,7 +10,7 @@ if(PACKAGE_TESTS)
 endif()
 
 
-add_library(currentRatesLib STATIC src/CurrentRates.cpp)
+add_library(currentRatesLib STATIC src/CurrentRates.cpp src/FixerApiReader.cpp)
 
 
 target_include_directories(currentRatesLib PUBLIC include)

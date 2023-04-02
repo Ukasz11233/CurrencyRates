@@ -31,7 +31,6 @@ std::size_t callback(
 void CurrentRates::getCurrentRateFromFixerApi()
 {
     CURL * curl;
-    CURLcode res;
     curl = curl_easy_init();
     std::cout << "debug" << std::flush;
     std::unique_ptr<std::string> outData(new std::string());
@@ -52,7 +51,6 @@ void CurrentRates::getCurrentRateFromFixerApi()
         struct curl_slist *headers = nullptr;
         headers = curl_slist_append(headers, apiKey.c_str());
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        res = curl_easy_perform(curl);
         std::cout << "outData: " << outData.get()->c_str() << std::flush;
     }
 //    std::cout << res << std::flush;
