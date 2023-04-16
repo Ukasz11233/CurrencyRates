@@ -22,4 +22,5 @@ macro(package_add_test TESTNAME)
 endmacro()
 
 
-package_add_test(myTest testCurrentRate.cpp)
+package_add_test(testCurrentRate testCurrentRate.cpp)
+package_add_test(testFixerApiReader testFixerApiReader.cpp)

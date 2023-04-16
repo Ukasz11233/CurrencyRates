@@ -3,6 +3,7 @@
 //
 
 #include <fstream>
+#include <logger/Log.h>
 #include "project/CurrentRates.h"
 
 
@@ -31,9 +32,7 @@ std::size_t callback(
 void CurrentRates::getCurrentRateFromFixerApi()
 {
     CURL * curl;
-    CURLcode res;
     curl = curl_easy_init();
-    std::cout << "debug" << std::flush;
     std::unique_ptr<std::string> outData(new std::string());
     if(curl)
     {
@@ -41,19 +40,16 @@ void CurrentRates::getCurrentRateFromFixerApi()
         std::string apiKey;
         std::getline(fileApiKey, apiKey);
         apiKey.insert(0, "apikey: ");
-
+        Log::LOG_DEBUG(apiKey);
         curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_easy_setopt(curl, CURLOPT_URL, "https://api.apilayer.com/fixer/convert?to=PLN&from=EUR&amount=1");
+        curl_easy_setopt(curl, CURLOPT_URL, "https://api.apilayer.com/fixer/convert?to=pln&from=EUR&amount=1");
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
-        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 3);
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, outData.get());
-        struct curl_slist *headers = nullptr;
-        headers = curl_slist_append(headers, apiKey.c_str());
+        struct curl_slist *headers = NULL;
+        headers = curl_slist_append(headers, "apikey: uqG5HczlbczRvC7T4vQ9tRr3GBwYzA6L");
         curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-        res = curl_easy_perform(curl);
-        std::cout << "outData: " << outData.get()->c_str() << std::flush;
+
+        Log::LOG_DEBUG(outData.get()->c_str());
     }
-//    std::cout << res << std::flush;
+    curl_easy_cleanup(curl);
 }
