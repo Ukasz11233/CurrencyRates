@@ -34,4 +34,6 @@
 # apiKey
 *apiKeyi*
 
-build
+build/
+build/*
+build*

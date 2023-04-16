@@ -1,11 +1,12 @@
 #include <iostream>
 #include <project/CurrentRates.h>
+#include <project/FixerApiReader.h>
 #include <logger/Log.h>
 
 
 int main() {
-    CurrentRates currentRates(20.4);
+    FixerApiReader fixer;
     Log::LOG_DEBUG("test");
-    currentRates.getCurrentRateFromFixerApi();
+    fixer.getCurrentRate();
     return 0;
 }

@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/myTest2.dir/testCurrentRate.cpp.o -o myTest2  ../lib/libgtest.a ../lib/libgmock.a ../lib/libgtest_main.a ../lib/libgtest.a -lpthread 

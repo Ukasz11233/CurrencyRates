@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/CurrencyRates.dir/app/main.cpp.o -o CurrencyRates  libcurrentRatesLib.a /usr/lib/x86_64-linux-gnu/libcurl.so 
