@@ -1,0 +1,8 @@
+//
+// Created by ukasz on 20.04.2023.
+//
+
+#ifndef CURRENCYRATES_CURRENCIES_H
+#define CURRENCYRATES_CURRENCIES_H
+
+#endif //CURRENCYRATES_CURRENCIES_H
