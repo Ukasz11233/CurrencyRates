@@ -13,6 +13,10 @@ public:
     {
         std::cout << "\033[1;33m" << debugMessage << "\033[0m" << std::endl;
     }
+    inline static void LOG_INFO(std::string debugMessage)
+    {
+        std::cout << "\033[1;36m" << debugMessage << "\033[0m" << std::endl;
+    }
 private:
 };
 
