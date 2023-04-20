@@ -1,7 +1,14 @@
 #include <gtest/gtest.h>
 #include "project/CurrentRates.h"
+#include "../currencies.h"
 
-class testCurrentRate : public ::testing::TestWithParam<double>
+struct expectedValues
+{
+    std::string currency;
+    double value;
+};
+
+class testCurrentRate : public ::testing::TestWithParam<expectedValues>
 {
 public:
     void SetUp() override {}
@@ -12,17 +19,18 @@ private:
 TEST_P(testCurrentRate, initalTest)
 {
     auto const currentRateInfoExpected = GetParam();
-    CurrentRates currentRates(2);
-    EXPECT_EQ(currentRateInfoExpected, currentRates.getCurrentRate());
+    CurrentRates currentRates;
+    EXPECT_EQ(currentRateInfoExpected.value, currentRates.getCurrentRate(currentRateInfoExpected.currency));
 }
 
-std::vector<double> loadTestData()
+std::vector<expectedValues> loadTestData()
 {
-    std::vector<double> testData;
-    testData.push_back(2);
+    std::vector<expectedValues> testData{
+        {.currency = "EUR", .value = 0},
+        {.currency = "USD", .value = 0}};
     return testData;
 }
 
-INSTANTIATE_TEST_CASE_P(Test1,
+INSTANTIATE_TEST_CASE_P(testConstructor,
                         testCurrentRate,
                         ::testing::ValuesIn(loadTestData()));

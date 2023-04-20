@@ -5,19 +5,20 @@
 #ifndef CURRENCYRATES_CURRENTRATES_H
 #define CURRENCYRATES_CURRENTRATES_H
 #include <iostream>
+#include <map>
 #include <curl/curl.h>
-#include <nlohmann/json.hpp>
 #include <sstream>
 
 class CurrentRates {
 public:
-    CurrentRates(double _currentRate) : currentRate(_currentRate) {};
+    CurrentRates();
     friend std::ostream & operator<<(std::ostream & output, const CurrentRates & currentRates);
-    double getCurrentRate() const;
-
+    double getCurrentRate(std::string) const;
+    std::string toString() const;
     void getCurrentRateFromFixerApi();
 private:
     double currentRate;
+    std::map<std::string, double> currentValues;
 };
 
 

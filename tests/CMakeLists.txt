@@ -23,4 +23,4 @@ endmacro()
 
 
 package_add_test(testCurrentRate testCurrentRate.cpp)
-package_add_test(testFixerApiReader testFixerApiReader.cpp)
+#package_add_test(testFixerApiReader testFixerApiReader.cpp)

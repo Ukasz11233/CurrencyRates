@@ -1,11 +1,16 @@
 //
 // Created by ukasz on 30.03.2023.
 //
-
-#include <fstream>
 #include <logger/Log.h>
 #include "project/CurrentRates.h"
-
+#include "../currencies.h"
+CurrentRates::CurrentRates()
+{
+    for(auto currency : {CURRENCIES})
+    {
+        currentValues.insert({currency, 0});
+    }
+}
 
 std::ostream & operator<<(std::ostream & output, const CurrentRates & currentRates)
 {
@@ -13,43 +18,25 @@ std::ostream & operator<<(std::ostream & output, const CurrentRates & currentRat
     return output;
 }
 
-double CurrentRates::getCurrentRate() const
+double CurrentRates::getCurrentRate(std::string currency) const
 {
-    return currentRate;
-}
-
-std::size_t callback(
-        const char* in,
-        std::size_t size,
-        std::size_t num,
-        std::string* out)
-{
-    const std::size_t totalBytes(size * num);
-    out->append(in, totalBytes);
-    return totalBytes;
-}
-
-void CurrentRates::getCurrentRateFromFixerApi()
-{
-    CURL * curl;
-    curl = curl_easy_init();
-    std::unique_ptr<std::string> outData(new std::string());
-    if(curl)
+    auto pos = currentValues.find(currency);
+    if(pos == currentValues.end())
     {
-        std::ifstream fileApiKey("apiKey.txt");
-        std::string apiKey;
-        std::getline(fileApiKey, apiKey);
-        apiKey.insert(0, "apikey: ");
-        Log::LOG_DEBUG(apiKey);
-        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "GET");
-        curl_easy_setopt(curl, CURLOPT_URL, "https://api.apilayer.com/fixer/convert?to=pln&from=EUR&amount=1");
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-        curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
-        struct curl_slist *headers = NULL;
-        headers = curl_slist_append(headers, "apikey: uqG5HczlbczRvC7T4vQ9tRr3GBwYzA6L");
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-        Log::LOG_DEBUG(outData.get()->c_str());
+        return -1;
     }
-    curl_easy_cleanup(curl);
+    return pos -> second;
+}
+
+std::string CurrentRates::toString() const
+{
+    std::string output{"Current currency values\n"};
+    for(auto currency : {CURRENCIES})
+    {
+        output.append(currency);
+        output.append(": ");
+        output.append(std::to_string(this -> getCurrentRate(currency)));
+        output.append("\n");
+    }
+    return output;
 }
